@@ -3,7 +3,6 @@ package robot;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /*
  * This class implements some utils I'll need in the project
  */
@@ -20,7 +19,8 @@ public class RobotStatics {
 	 */
 
 	public static boolean checkInside(RobotPosition pos) {
-		if (pos.getColumn() >= numRows || pos.getRow() >= numRows || pos.getColumn() < 0 || pos.getRow() < 0)
+		if (Integer.valueOf(pos.getColumn()) >= numRows || Integer.valueOf(pos.getRow()) >= numRows
+				|| Integer.valueOf(pos.getColumn()) < 0 || Integer.valueOf(pos.getRow()) < 0)
 			return false;
 		else
 			return true;
@@ -35,7 +35,7 @@ public class RobotStatics {
 
 	}
 
-	public static RobotPosition place(int column, int row, String facing) {
+	public static RobotPosition place(String column, String row, String facing) {
 		return new RobotPosition(row, column, facing);
 	}
 
@@ -76,24 +76,30 @@ public class RobotStatics {
 	public static void move(RobotPosition robot) {
 		switch (robot.getFacing().toUpperCase()) {
 		case "NORTH":
-			robot.setRow(robot.getRow() - 1);
+			robot.setRow(String.valueOf(Integer.valueOf(robot.getRow()) - 1));
 			break;
 		case "EAST":
-			robot.setColumn(robot.getColumn() + 1);
+			robot.setColumn(String.valueOf(Integer.valueOf(robot.getColumn()) + 1));
 			break;
 		case "SOUTH":
-			robot.setRow(robot.getRow() + 1);
+			robot.setRow(String.valueOf(Integer.valueOf(robot.getRow()) + 1));
 			break;
 		case "WEST":
-			robot.setColumn(robot.getColumn() - 1);
+			robot.setColumn(String.valueOf(Integer.valueOf(robot.getColumn()) - 1));
 			break;
 		}
 	}
 
 	public static boolean validateCommand(String cmd) {
-		String regex = "^[A-Za-z]+ [0-9],[0-9],[A-Za-z]+$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(cmd);
-		return matcher.matches();
+		String fullCmd = "^[A-Za-z]+ [0-9],[0-9],[A-Za-z]+$";
+		String onyOneWord = "^[A-Za-z]+$";
+
+		Pattern firstPattern = Pattern.compile(fullCmd);
+		Matcher firstMatcher = firstPattern.matcher(cmd);
+
+		Pattern secondPattern = Pattern.compile(onyOneWord);
+		Matcher secondMatcher = secondPattern.matcher(cmd);
+
+		return (firstMatcher.matches() || secondMatcher.matches());
 	}
 }

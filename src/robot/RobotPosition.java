@@ -4,29 +4,32 @@ package robot;
  */
 public class RobotPosition {
 
-	private int row;
-	private int column;
+	private String row;
+	private String column;
 	private String facing;
 
-	public RobotPosition(int row, int column, String facing) {
+	public RobotPosition(String row, String column, String facing) {
 		this.row = row;
 		this.column = column;
-		this.facing = facing;
+		this.facing = facing.toUpperCase();
 	}
 
-	public int getRow() {
+	public RobotPosition() {
+	}
+
+	public String getRow() {
 		return row;
 	}
 
-	public void setRow(int row) {
+	public void setRow(String row) {
 		this.row = row;
 	}
 
-	public int getColumn() {
+	public String getColumn() {
 		return column;
 	}
 
-	public void setColumn(int column) {
+	public void setColumn(String column) {
 		this.column = column;
 	}
 
@@ -37,5 +40,18 @@ public class RobotPosition {
 	public void setFacing(String facing) {
 		this.facing = facing;
 	}
+
+	public void place(String row, String column, String facing) {
+		this.setColumn(column);
+		this.setRow(row);
+		this.setFacing(facing.toUpperCase());
+	}
+
+	@Override
+	public String toString() {
+		return "RobotPosition [row=" + row + ", column=" + column + ", facing=" + facing + "]";
+	}
+	
+	
 
 }
