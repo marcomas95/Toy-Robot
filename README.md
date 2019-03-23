@@ -1,3 +1,7 @@
+This is the solution to the following coding challenge.
+
+
+
 ## Code problem details:
 -----------
 **Toy Robot Simulator**
