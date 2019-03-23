@@ -28,7 +28,6 @@ public class RobotStatics {
 
 	public static boolean validate(RobotPosition robot) {
 		if (!RobotStatics.checkInside(robot)) {
-			System.out.println("You lose.");
 			return false;
 		} else
 			return true;
@@ -91,11 +90,11 @@ public class RobotStatics {
 	}
 
 	public static boolean validateCommand(String cmd) {
-		String fullCmd = "^[A-Za-z]+ [0-9],[0-9],[A-Za-z]+$";
+		String fullCmd = "^[A-Za-z]+ [0-9],[0-9],\\b(NORTH|SOUTH|WEST|EAST)\\b$";
 		String onyOneWord = "^[A-Za-z]+$";
 
 		Pattern firstPattern = Pattern.compile(fullCmd);
-		Matcher firstMatcher = firstPattern.matcher(cmd);
+		Matcher firstMatcher = firstPattern.matcher(cmd.toUpperCase());
 
 		Pattern secondPattern = Pattern.compile(onyOneWord);
 		Matcher secondMatcher = secondPattern.matcher(cmd);
